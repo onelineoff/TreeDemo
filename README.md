@@ -3,7 +3,7 @@ Tree Demo
 
 # Purpose
 
-This is demo code for building and reporting on a tree structure.  It's implemented using Java and Spring, and will expose a REST interface.  It can run as a standalone application, or inside Docker or some other container infrastructure.
+This is demo code for building and reporting on a tree structure.  The main technologies used are Java, Spring and Spring Boot, and the Neo4j graph database.
 
 
 
@@ -11,10 +11,9 @@ This is demo code for building and reporting on a tree structure.  It's implemen
 
 This is intended as a demo project, not for any practical use.  It's meant to be production quality code as far as it goes, but there are assorted limitations, including:
 
-1. Persistence is done to the file system, which is not performant.
-2. Each docker container, or standalone Java application does not interact with other instances, and it is not safe for them to share the same persistence files.
-3. All node information will be held in memory, so that is a limitation as to the size of the tree.
-4. Since the nodes are mutable, operations cannot necessarily be run in parallel without inconsistent information being returned.  This project does **NOT** attempt to make the REST calls safe in a multi-user environment.
+1. Each docker container, or standalone Java application does not interact with other instances, and it is not safe for them to share the same persistence files.
+2. The Neo4j database is embedded in the Java application.  In a production system, the database would be run independently, and accessed through the Java driver.
+3. Spring Boot likes json.  Supporting xml or other format would require additional work.
 
 # REST API
 
@@ -28,8 +27,6 @@ The GET calls allow for retrieving information about the tree.  The POST calls a
 The first call returns information about the specified node, as well as information for subnodes to any level.
 
 The second call gets the parents of the specified node, up to the root.
-
-The Content-Type header can be set to application/xml, or application/json to get the data in the appropriate format.
 
 ## POST
 
@@ -52,7 +49,7 @@ The moveNode call can be called on any node which is **NOT** the root node.  The
 
 1. moveNode?id=<id>&parentId=<id>
 
-The moveNode returns a 204 on success, or a 403 if the parentId is invalid.
+The moveNode call returns a 204 on success, or a 403 if  parentId is invalid.
 
 ## DELETE
 
@@ -64,9 +61,3 @@ The deleteNode call returns 204 on success, or 403 if the id doesn't exist, or t
 
 It should be possible just to run the code from the jar file on the command line, but a Dockerfile will be created so that the code can be run as a docker container.
 
-# TODO
-
-Numerous things can be done to make the code better.
-
-1. Implement some sort of transactional logic so that conflicting calls are somehow resolved.  
-2. Implement a more robust persistence solution than the file system, such as an RDBMS.

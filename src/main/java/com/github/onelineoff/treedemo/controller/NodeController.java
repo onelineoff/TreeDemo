@@ -2,6 +2,8 @@ package com.github.onelineoff.treedemo.controller;
 
 import java.util.Collection;
 
+import org.springframework.stereotype.Controller;
+
 import com.github.onelineoff.treedemo.dto.Node;
 
 public interface NodeController {
