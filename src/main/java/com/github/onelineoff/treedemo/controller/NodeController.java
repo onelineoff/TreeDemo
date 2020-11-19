@@ -11,4 +11,5 @@ public interface NodeController {
 	public Node createNode(String name, int parentId);
 	public boolean moveNode(Node node, int parentId);
 	public boolean deleteNode(Node node, boolean recursiveFlag);
+	public int getHeight(Node node);
 }

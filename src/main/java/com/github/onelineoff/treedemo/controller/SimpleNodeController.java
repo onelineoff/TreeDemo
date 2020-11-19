@@ -46,4 +46,10 @@ public class SimpleNodeController implements NodeController {
 		return false;
 	}
 
+	@Override
+	public int getHeight(Node node) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
