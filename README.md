@@ -60,6 +60,10 @@ The moveNode returns a 204 on success, or a 403 if the parentId is invalid.
 
 The deleteNode call returns 204 on success, or 403 if the id doesn't exist, or the recursive flag is set to false, and the node has children.  The default for the recursive flag is true.
 
+# Deploy
+
+It should be possible just to run the code from the jar file on the command line, but a Dockerfile will be created so that the code can be run as a docker container.
+
 # TODO
 
 Numerous things can be done to make the code better.
